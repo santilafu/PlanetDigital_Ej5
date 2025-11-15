@@ -60,5 +60,11 @@ public class Empresa {
     public void setPais(String pais) {
         this.pais = pais;
     }
+    public List<PersonaContacto> getContactos() {
+        return contactos;
+    }
+    public void setContactos(List<PersonaContacto> contactos) {
+        this.contactos = contactos;
+    }
 
 }

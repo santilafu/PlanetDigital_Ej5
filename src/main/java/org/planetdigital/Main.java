@@ -23,8 +23,23 @@ public class Main {
             session.persist(e1);
 
             session.getTransaction().commit();
-
             System.out.println("Datos insertados correctamente.");
+
+            // Mostrar datos insertados
+            session.beginTransaction();
+            var empresas = session.createQuery("from Empresa", Empresa.class).list();
+            System.out.println("\nEmpresas registradas:");
+            for (Empresa emp : empresas) {
+                System.out.println(emp);
+
+                // Forzar carga de contactos (LAZY)
+                emp.getContactos().forEach(contacto ->
+                        System.out.println("   - " + contacto)
+                );
+            }
+
+            session.getTransaction().commit();
+
         } finally {
             session.close();
             factory.close();
